@@ -1,5 +1,3 @@
-# 后期需要做的：如果无法正常写入用户名或密码，则回退
-
 import os,sys,shutil
 
 
@@ -27,6 +25,10 @@ class WriteUserInfo(object):
         for i in self.unsupport_username_char:
             if i in self.username:
                 return 'UCU'  # UNSUPPORTED CHARACTER IN USERNAME
+        self.__program_path = os.path.abspath('../')
+        self.__file_save_path = os.path.join(self.__program_path, 'data/File/UserData')
+        if not os.path.exists(self.__file_save_path):
+            os.mkdir(self.__file_save_path,mode=0o777)
         check_username_exist=Core.FileIO.Read.read_user_info.ReadUserInfo('c', hex(check_username_exist_id))
         check_username_exist_id = hex(check_username_exist_id + 1)
         check_username_exist_return=check_username_exist.usre(username)
@@ -40,14 +42,7 @@ class WriteUserInfo(object):
         for i in self.__true_password:
             if not i in self.support_password_char and not i in self.support_password_char.upper():
                 return 'UCP' #UNSUPPORTED CHARACTER IN PASSWORD
-        self.__program_path=os.path.abspath('../')
-        self.__file_save_path=os.path.join(self.__program_path,'data/File/UserData')
         user_created=[None,None]
-
-        if not os.path.exists(self.__file_save_path):
-            os.mkdir(self.__file_save_path,mode=0o777)
-
-
         self.__username_path=os.path.join(self.__file_save_path,r'.usrname.bookmanager')
         with open(self.__username_path,'a+',errors='ignore') as username_file:
             username_file.seek(0)

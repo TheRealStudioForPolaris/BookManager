@@ -11,7 +11,7 @@ class ReadUserInfo(object):
         if self.todo!='c':
             return 'EUT'  #ERROR:UNKNOWN TDO
         self.__username_file_path=os.path.abspath(user_file_path)
-        username_file=open(self.__username_file_path,'w')
+        username_file=open(self.__username_file_path,'a',errors='ignore')
         username_file.close()
         with open(self.__username_file_path,'r',errors='ignore') as username_file:
             all_usernames=username_file.readlines()
@@ -41,7 +41,7 @@ class ReadUserInfo(object):
             return 'EUT'  #ERROR:UNKNOWN TDO
         self.__password_will_check=f'{password}\n'
         self.__password_file_path=os.path.abspath(password_file_path)
-        password_file=open(self.__password_file_path,'w')
+        password_file=open(self.__password_file_path,'a')
         password_file.close()
         with open(self.__password_file_path,'r',errors='ignore') as password_file:
             all_passwords=password_file.readlines()
