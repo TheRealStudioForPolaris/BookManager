@@ -30,10 +30,10 @@ class LoginWindow(QWidget):
         if not username:
             QtWidgets.QMessageBox.critical(win, '登录失败', '用户名不能为空', QtWidgets.QMessageBox.Close)
             return
-        import Core.Users.user_actives
+        import Core.Users.user_service
         import Core.FileIO.Read.read_user_info
         login_user_id=0x000
-        login_user=Core.Users.user_actives.UserActives('l', hex(login_user_id))
+        login_user=Core.Users.user_actives.UserService('l', hex(login_user_id))
         login_user_id=hex(login_user_id+1)
         login_user_return=login_user.usrl(username,password)
         if login_user_return=='UNC':
@@ -86,8 +86,8 @@ class RegisterWindow(QDialog):
         if reg_password!=reg_re_password:
             QtWidgets.QMessageBox.critical(None, '注册失败', '密码与重复密码不相同', QtWidgets.QMessageBox.Close)
             return
-        import Core.Users.user_actives
-        create_user= Core.Users.user_actives.UserActives('r', hex(create_user_id))
+        import Core.Users.user_service
+        create_user= Core.Users.user_actives.UserService('r', hex(create_user_id))
         create_user_return=create_user.usrr(reg_username,reg_password)
         #print(create_user_return)
 
