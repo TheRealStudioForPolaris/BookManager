@@ -5,7 +5,7 @@ import Core.FileIO.Read.read_user_info
 class WriteUserInfo(object):
     """包含了创建用户的逻辑"""
     support_password_char = 'abcdefghijklmnopqrstuvwxyz1234567890_!+=-\\,.@$%^&*/?<>{}[]|`~#()'
-    unsupport_username_char=['\n','\t','\r',' ']
+    unsupport_username_char=['\n','\t','\r','|'*10]
     def __init__(self,todo:str,active_id:int):
         """初始化方法"""
         self.todo=todo
@@ -48,7 +48,7 @@ class WriteUserInfo(object):
             username_file.seek(0)
             file_old=username_file.read()
             username_file.seek(0,1)
-            username_file.write(f'{username} Normal\n')
+            username_file.write(f'{username}{'|'*10}Normal\n')
             username_file.seek(0)
             file_new=username_file.read()
             self.username_file_list=username_file.readlines()
