@@ -32,7 +32,7 @@ class WriteBookInfo(object):
         book_created_num=0
         for i in filename_tuple:
             for a in files_tuple:
-                final_str=re.sub('\n','/n',str(a))
+                final_str=re.sub(r'\n',r'/n',str(a))
                 self.__file_path=os.path.join(self.__book_file_path,f'.{i}.bookmanager')
                 with open(self.__file_path,'a+',errors='ignore') as file:
                     file.seek(0)
