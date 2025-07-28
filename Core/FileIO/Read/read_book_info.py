@@ -61,7 +61,7 @@ class ReadBookInfo(object):
             for i in filename_tuple:
                 with open(os.path.join(self.__book_file_path,i),'r',errors='ignore') as file:
                     file_list=file.readlines()
-                    return_list.append(re.sub('/n','\n',str(file_list[self.__book_location])))
+                    return_list.append(re.sub(r'/n',r'\n',str(file_list[self.__book_location])))
 
         elif self.isbn:
             for i in self.__isbn_list:
@@ -71,7 +71,7 @@ class ReadBookInfo(object):
             for i in filename_tuple:
                 with open(os.path.join(self.__book_file_path,i),'r',errors='ignore') as file:
                     file_list=file.readlines()
-                    return_list.append(re.sub('/n','\n',str(file_list[self.__book_location])))
+                    return_list.append(re.sub(r'/n',r'\n',str(file_list[self.__book_location])))
 
         if len(return_list) != len(file_list):
             return 'NOK'  #NOT OKAY
