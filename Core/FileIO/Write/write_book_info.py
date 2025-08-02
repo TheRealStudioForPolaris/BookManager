@@ -32,6 +32,11 @@ class WriteBookInfo(object):
         book_created_num=0
         for i in filename_tuple:
             for a in files_tuple:
+                if i=='isbn':
+                    import Core.FileIO.Read.read_book_info
+                    check_book_exist=Core.FileIO.Read.read_book_info.ReadBookInfo('c',self.active_id)
+                    if 'BWC' == check_book_exist.cbke(isbn=a):
+                        return 'BWC'
                 final_str=re.sub(r'\n',r'/n',str(a))
                 self.__file_path=os.path.join(self.__book_file_path,f'.{i}.bookmanager')
                 with open(self.__file_path,'a+',errors='ignore') as file:
@@ -45,7 +50,7 @@ class WriteBookInfo(object):
                         book_created[book_created_num]=True
                         book_created_num+=1
                     else:
-                        self.__roolback(i)
+                        self.__rollback(i)
                         return 'EFW',i  #ERROR FROM FILE WRITING
         return 'AOK'  #ALL ACTIVES ARE OKAY
     def bokc(self,
@@ -58,7 +63,7 @@ class WriteBookInfo(object):
             intro:str)->str|tuple:
         return self.__create_book(name,price,writer,press,publish_time,isbn,intro)
 
-    def __roolback(self,error_from:str):
+    def __rollback(self, error_from:str):
         with open(os.path.join(self.__book_file_path,f'.{error_from}.bookmanager'),'w+',errors='ignore') as roolback_file:
             roolback_file.seek(0,1)
             self.__roolback_file_list=roolback_file.readlines()
