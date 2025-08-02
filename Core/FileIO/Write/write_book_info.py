@@ -35,8 +35,9 @@ class WriteBookInfo(object):
                 if i=='isbn':
                     import Core.FileIO.Read.read_book_info
                     check_book_exist=Core.FileIO.Read.read_book_info.ReadBookInfo('c',self.active_id)
-                    if 'BWC' == check_book_exist.cbke(isbn=a):
-                        return 'BWC'
+                    check_book_exist_return=check_book_exist.cbke(isbn=a)
+                    if check_book_exist_return == 'BWC':
+                        return 'BWC' #BOOK WAS CREATED
                 final_str=re.sub(r'\n',r'/n',str(a))
                 self.__file_path=os.path.join(self.__book_file_path,f'.{i}.bookmanager')
                 with open(self.__file_path,'a+',errors='ignore') as file:
