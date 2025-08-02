@@ -40,3 +40,14 @@ class BooksService(object):
             return 'EUT'  #ERROR UNSUPPORTED TDO
         else:
             return 'EUT'  # ERROR UNSUPPORTED TDO
+    def nbok(self,
+                   name: str,
+                   price: int | float,
+                   writer: str,
+                   press: str,
+                   publish_time: datetime.date,
+                   isbn: int,
+                   intro: str,
+                   icons_path:str|None=None
+                   )->str|tuple:
+        return self.__new_book(name,price,writer,press,publish_time,isbn,intro,icons_path)
